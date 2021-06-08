@@ -4,7 +4,7 @@ html, body{
     font-family: 'Pacifico', 'cursive';
     box-sizing: border-box;
     color:white;
-    background-color: rgb(169, 214, 231);
+    background-color: #D3C2CE;
 }
 body{
     
@@ -26,7 +26,7 @@ header{
 .player-number{
     color: rgb(233, 255, 202);
     border-radius: 2px;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
     font-weight: bold;
 }
 .player-score{
@@ -39,7 +39,8 @@ header{
 }
 .board-container{
     background-color: white;
-    width: 26rem;
+    width: 26rem; 
+    /* widths and heights of the board grid rows and cols */
     border-radius: 6px;
     margin: auto;
     height: 26rem;
