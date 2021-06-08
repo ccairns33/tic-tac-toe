@@ -1,0 +1,62 @@
+html, body{
+    height:100%;
+    width:100%;
+    font-family: 'Pacifico', 'cursive';
+    box-sizing: border-box;
+    color:white;
+    background-color: rgb(169, 214, 231);
+}
+body{
+    
+    margin:auto;
+}
+.d-flex {
+    display:flex;
+}
+.title{
+    margin-bottom: 0;
+}
+.game-info{
+    margin-top:0;
+}
+header{
+    text-align: center;
+    color:white;
+}
+.player-number{
+    color: rgb(233, 255, 202);
+    border-radius: 2px;
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+.player-score{
+    font-size: 2.5rem;
+}
+.container{
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom:5%;
+}
+.board-container{
+    background-color: white;
+    width: 26rem;
+    border-radius: 6px;
+    margin: auto;
+    height: 26rem;
+    border:1rem white solid;
+}
+.board-grid{  
+    display: grid;
+    grid-template-rows: repeat(3, 8rem);
+    grid-template-columns: repeat(3, 8rem);
+    grid-gap: 1rem;
+    border-radius: 6px;
+}
+.grid-square{
+    background-color: rgb(221, 241, 193);
+    border-radius: 4px;
+}
+.grid-square:hover{
+    background-color: rgb(204, 240, 150);
+    cursor: pointer;
+}
