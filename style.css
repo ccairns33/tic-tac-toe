@@ -14,10 +14,11 @@ body{
     display:flex;
 }
 .title{
-    margin-bottom: 0;
+    margin: 0;
 }
 .game-info{
-    margin-top:0;
+    margin-bottom: .5rem;
+    margin-top: 0;
 }
 header{
     text-align: center;
@@ -35,7 +36,7 @@ header{
 .container{
     margin-left: 5%;
     margin-right: 5%;
-    margin-bottom:5%;
+    margin-bottom:1%;
 }
 .board-container{
     background-color: white;
@@ -60,4 +61,23 @@ header{
 .grid-square:hover{
     background-color: rgb(204, 240, 150);
     cursor: pointer;
+}
+button{
+    padding:.5rem 2rem;
+    border:none;
+    background-color: white;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    color:#c0b1bc;
+    font-weight: bold;
+    border-radius: 4px;
+}
+button:hover{
+    background-color: rgb(221, 241, 193);
+    cursor:pointer;
+
+}
+.center{
+    justify-content: center;
+    align-content: center;
 }

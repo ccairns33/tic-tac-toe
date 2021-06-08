@@ -1,7 +1,27 @@
 /* 
 <i class="fas fa-tint"></i> //water drop
 <i class="fas fa-dragon"></i> //dragon
+<i class="far fa-circle"></i>
+<i class="fas fa-times"></i>
 */
+
+const playerFactory = () => {
+    let player1 = true;
+    let player2 = false;
+
+   return {
+       player1
+   }
+
+};
+const gameFactory = () => {
+    //make sure correct player clicked
+
+    //make sure not a winning move
+
+    //play round
+
+  };
 
 //module function for populating game board
 const GameBoard = (() => {
@@ -17,5 +37,23 @@ const GameBoard = (() => {
         boardGrid.appendChild(boardSquare);
 
     });
+    //adding Event Listeners to each square
+    let arrBoardGrid = Array.from(document.querySelectorAll('.grid-square'));
+    arrBoardGrid.forEach((element,index)=>{
+        element.addEventListener("click", (e) =>{
+            if (playerFactory.player1){
+                
+                console.log(e.target);
+            }
+        
+        })
+    });
+
+
+    return{
+        arrBoardGrid
+    };
 
 })();
+
+
