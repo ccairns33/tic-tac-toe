@@ -59,13 +59,26 @@ header{
     border-radius: 4px;
     position: relative;
 }
+.grid-square1-clicked{
+    background-color: rgb(204, 240, 150);
+    border-radius: 4px;
+    position: relative;
+}
+.grid-square2-clicked{
+    border-radius: 4px;
+    position: relative;
+    background-color: #D3C2CE;
+}
 .grid-square:hover{
     background-color: rgb(204, 240, 150);
     cursor: pointer;
 }
+.grid-square2:hover{
+    background-color: #D3C2CE;
+    cursor: pointer;
+}
 .no-click:hover{
     cursor:default;
-    background-color: rgb(221, 241, 193);
 
 }
 button{

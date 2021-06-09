@@ -50,9 +50,15 @@ const game = (() => {
     
     addIcon = (clickedCell, arrClickedCells) =>{
         if (player1Turn){
+            clickedCell.classList.remove("grid-square");
+            clickedCell.classList.add("grid-square1-clicked");
+
             clickedCell.innerHTML = `<i class="fas fa-times"></i>`// adding x to cell
         }
         else {
+            clickedCell.classList.remove("grid-square");
+            clickedCell.classList.add("grid-square2-clicked");
+
             clickedCell.innerHTML = `<i class="fas fa-circle"></i>`// adding circle to cell
 
         }
