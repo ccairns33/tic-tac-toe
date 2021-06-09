@@ -57,10 +57,16 @@ header{
 .grid-square{
     background-color: rgb(221, 241, 193);
     border-radius: 4px;
+    position: relative;
 }
 .grid-square:hover{
     background-color: rgb(204, 240, 150);
     cursor: pointer;
+}
+.no-click:hover{
+    cursor:default;
+    background-color: rgb(221, 241, 193);
+
 }
 button{
     padding:.5rem 2rem;
@@ -80,4 +86,22 @@ button:hover{
 .center{
     justify-content: center;
     align-content: center;
+}
+.fas{
+    font-weight: 900;
+    position: absolute;
+    
+}
+.fa-circle{
+    top: 1.5rem;
+    left: 1.5rem;
+    font-size: 5rem;
+    /* centering the circle in the grid square */
+}
+.fa-times{
+    font-size: 6.5rem;
+    bottom: .5rem;
+    left: 1.7rem;
+    /* centering the x in the grid square */
+
 }

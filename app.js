@@ -7,12 +7,10 @@
 
 const playerFactory = () => {
     let player1 = true;
-    let player2 = false;
 
-   return {
-       player1
-   }
-
+    return{
+        player1
+    };
 };
 const gameFactory = () => {
     //make sure correct player clicked
@@ -33,22 +31,33 @@ const GameBoard = (() => {
 
     board.forEach((element,index) => { //for each element in board array, populate DOM
         const boardSquare = document.createElement('div');
-        boardSquare.classList.add('grid-square', `${index}`); // index will repesent the specific grid square 0-8
+        boardSquare.classList.add('grid-square'); 
+        boardSquare.setAttribute("id", `${index}`);// index will repesent the specific grid square 0-8
         boardGrid.appendChild(boardSquare);
 
     });
     //adding Event Listeners to each square
     let arrBoardGrid = Array.from(document.querySelectorAll('.grid-square'));
     arrBoardGrid.forEach((element,index)=>{
-        element.addEventListener("click", (e) =>{
-            if (playerFactory.player1){
-                
-                console.log(e.target);
+        element.addEventListener("click", (e)=>{ //on click do this anon function, only once per cell to avoid over writing
+            const cell = e.target;
+            cell.classList.add("no-click"); //no longer clickable
+            if (playerFactory.player1) {
+            //if player one's turn
+                cell.innerHTML = `<i class="fas fa-times"></i>`
+                // adding x to cell
             }
-        
-        })
+            else{
+                cell.innerHTML = `<i class="fas fa-circle"></i>`
+                // adding circle to cell
+
+
+            }
+
+        }, {once:true})
     });
 
+    
 
     return{
         arrBoardGrid
