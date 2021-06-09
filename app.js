@@ -5,21 +5,71 @@
 <i class="fas fa-times"></i>
 */
 
-const playerFactory = () => {
-    let player1 = true;
-
-    return{
-        player1
-    };
+const playerFactory = (player, symbol) => {
+    return {
+        player,
+        symbol
+    }
 };
-const gameFactory = () => {
-    //make sure correct player clicked
+const game = (() => {
+    const player1 = playerFactory("player1", "times");
+    const player2 = playerFactory("player2", "circle");
+    // the cells picked arrays
+    let player1Moves = [];
+    let player2Moves = [];
 
-    //make sure not a winning move
+    let gameRound = 0;
+    let player1Turn = true; // start off as player 1
 
-    //play round
+    const winningOptions = [
+        [0,1,2],
+        [3,4,5],
+        [6,7,8],
+        [0,3,6],
+        [1,4,7],
+        [2,5,8],
+        [0,4,8],
+        [2,4,6],
+    ];
 
-  };
+    handleClick = (e) => {
+        //on click do this only once per cell to avoid over writing
+        const cell = e.target;
+        cell.classList.add("no-click"); //no longer clickable
+        
+        if (player1Turn) { //if player one's turn
+            addIcon(cell,player1Moves); 
+            player1Turn = false;
+        }
+        else{
+            addIcon(cell,player2Moves); 
+            player1Turn = true;
+        }
+        gameRoundIncrement(gameRound);
+    }
+    
+    addIcon = (clickedCell, arrClickedCells) =>{
+        if (player1Turn){
+            clickedCell.innerHTML = `<i class="fas fa-times"></i>`// adding x to cell
+        }
+        else {
+            clickedCell.innerHTML = `<i class="fas fa-circle"></i>`// adding circle to cell
+
+        }
+        arrClickedCells.push(clickedCell.id); //adding cells to array
+    }
+    gameRoundIncrement = (roundNum) =>{
+        // can only win after 5 rounds completed, counting to check that.
+        roundNum++;
+        if (roundNum >= 5){
+            //check to see if a winner..
+        }
+    }
+   
+    return {
+        handleClick,
+    };
+  })();
 
 //module function for populating game board
 const GameBoard = (() => {
@@ -36,29 +86,13 @@ const GameBoard = (() => {
         boardGrid.appendChild(boardSquare);
 
     });
+    
     //adding Event Listeners to each square
     let arrBoardGrid = Array.from(document.querySelectorAll('.grid-square'));
     arrBoardGrid.forEach((element,index)=>{
-        element.addEventListener("click", (e)=>{ //on click do this anon function, only once per cell to avoid over writing
-            const cell = e.target;
-            cell.classList.add("no-click"); //no longer clickable
-            if (playerFactory.player1) {
-            //if player one's turn
-                cell.innerHTML = `<i class="fas fa-times"></i>`
-                // adding x to cell
-            }
-            else{
-                cell.innerHTML = `<i class="fas fa-circle"></i>`
-                // adding circle to cell
-
-
-            }
-
-        }, {once:true})
+        element.addEventListener("click", game.handleClick, {once:true});
     });
-
     
-
     return{
         arrBoardGrid
     };
