@@ -14,10 +14,7 @@ const playerFactory = (player, symbol) => {
 const game = (() => {
     const player1 = playerFactory("player1", "times");
     const player2 = playerFactory("player2", "circle");
-    // the cells picked arrays
-    let player1Moves = [];
-    let player2Moves = [];
-
+    
     let gameRound = 0;
     let player1Turn = true; // start off as player 1
 
@@ -38,16 +35,21 @@ const game = (() => {
         cell.classList.add("no-click"); //no longer clickable
         
         if (player1Turn) { //if player one's turn
+            const currentPlayer = "player1"
             player1Turn = false; //after click, player1Turn is false
             nextTurn(player1Turn);
-            addIcon(cell,player1Moves); 
+            addIcon(cell); 
+            checkWin(currentPlayer);
+
         }
         else{
+            const currentPlayer = "player2"
             player1Turn = true;
             nextTurn(player1Turn);
-            addIcon(cell,player2Moves); 
+            addIcon(cell); 
+            checkWin( currentPlayer);
+
         }
-        gameRoundIncrement(gameRound);
     }
     /* player2HoverColor = () =>{
         if (player1Turn){
@@ -56,8 +58,24 @@ const game = (() => {
             });
         }
     } */
+
+    checkWin = (player) =>{
+        let containsClass = "";
+        if (player == "player1"){
+            containsClass= "grid-square1-clicked"
+        }
+        else {
+            containsClass= "grid-square2-clicked"
+
+        }
+        winningOptions.forEach((element, index) => { 
+            if (GameBoard.arrBoardGrid[element[0]].classList.contains(containsClass) && GameBoard.arrBoardGrid[element[1]].classList.contains(containsClass) && GameBoard.arrBoardGrid[element[2]].classList.contains(containsClass)) {
+                console.log("winner");
+            }
+        });
+    }
+
     nextTurn = (player1Turn) => {
-        
         const playingPlayer = document.querySelector(".player-number");
         if (!player1Turn){ //if player one is false, they have already clicked, so display player 2
             playingPlayer.textContent = "Player 2";
@@ -82,16 +100,8 @@ const game = (() => {
             clickedCell.innerHTML = `<i class="fas fa-circle"></i>`// adding circle to cell
 
         }
-        arrClickedCells.push(clickedCell.id); //adding cells to array
     }
-    gameRoundIncrement = (roundNum) =>{
-        // can only win after 5 rounds completed, counting to check that.
-        roundNum++;
-        if (roundNum >= 5){
-            //check to see if a winner..
-        }
-    }
-   
+    
     return {
         handleClick,
     };
@@ -108,13 +118,13 @@ const GameBoard = (() => {
     board.forEach((element,index) => { //for each element in board array, populate DOM
         const boardSquare = document.createElement('div');
         boardSquare.classList.add('grid-square'); 
-        boardSquare.setAttribute("id", `${index}`);// index will repesent the specific grid square 0-8
+        boardSquare.setAttribute("id", "grid-square");// index will repesent the specific grid square 0-8
         boardGrid.appendChild(boardSquare);
 
     });
     
     //adding Event Listeners to each square
-    let arrBoardGrid = Array.from(document.querySelectorAll('.grid-square'));
+    let arrBoardGrid = Array.from(document.querySelectorAll('#grid-square'));
     arrBoardGrid.forEach((element,index)=>{
         element.addEventListener("click", game.handleClick, {once:true});
     });
