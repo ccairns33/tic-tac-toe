@@ -38,18 +38,38 @@ const game = (() => {
         cell.classList.add("no-click"); //no longer clickable
         
         if (player1Turn) { //if player one's turn
+            player1Turn = false; //after click, player1Turn is false
+            nextTurn(player1Turn);
             addIcon(cell,player1Moves); 
-            player1Turn = false;
         }
         else{
-            addIcon(cell,player2Moves); 
             player1Turn = true;
+            nextTurn(player1Turn);
+            addIcon(cell,player2Moves); 
         }
         gameRoundIncrement(gameRound);
     }
-    
-    addIcon = (clickedCell, arrClickedCells) =>{
+    /* player2HoverColor = () =>{
         if (player1Turn){
+            GameBoard.arrBoardGrid.forEach((element,index)=>{
+                
+            });
+        }
+    } */
+    nextTurn = (player1Turn) => {
+        
+        const playingPlayer = document.querySelector(".player-number");
+        if (!player1Turn){ //if player one is false, they have already clicked, so display player 2
+            playingPlayer.textContent = "Player 2";
+        }
+        else {
+            playingPlayer.textContent = "Player 1";
+
+        }
+    }
+
+    addIcon = (clickedCell, arrClickedCells) =>{
+        if (!player1Turn){ //meaning player1 already clicked, so player1Turn is now false
             clickedCell.classList.remove("grid-square");
             clickedCell.classList.add("grid-square1-clicked");
 
