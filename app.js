@@ -5,16 +5,16 @@
 <i class="fas fa-times"></i>
 */
 
-const playerFactory = (player, symbol) => {
+const playerFactory = (player, score) => {
     return {
         player,
-        symbol
+        score
     }
 };
 const game = (() => {
-    const player1 = playerFactory("player1", "times");
-    const player2 = playerFactory("player2", "circle");
-    
+    const player1 = playerFactory("player1", 0);
+    const player2 = playerFactory("player2", 0);
+    let winner = false;
     let gameRound = 0;
     let player1Turn = true; // start off as player 1
 
@@ -35,7 +35,7 @@ const game = (() => {
         cell.classList.add("no-click"); //no longer clickable
         
         if (player1Turn) { //if player one's turn
-            const currentPlayer = "player1"
+            let currentPlayer = player1;
             player1Turn = false; //after click, player1Turn is false
             nextTurn(player1Turn);
             addIcon(cell); 
@@ -43,7 +43,7 @@ const game = (() => {
 
         }
         else{
-            const currentPlayer = "player2"
+            let currentPlayer = player2;
             player1Turn = true;
             nextTurn(player1Turn);
             addIcon(cell); 
@@ -51,17 +51,9 @@ const game = (() => {
 
         }
     }
-    /* player2HoverColor = () =>{
-        if (player1Turn){
-            GameBoard.arrBoardGrid.forEach((element,index)=>{
-                
-            });
-        }
-    } */
-
     checkWin = (player) =>{
         let containsClass = "";
-        if (player == "player1"){
+        if (player.player == "player1"){
             containsClass= "grid-square1-clicked"
         }
         else {
@@ -71,10 +63,28 @@ const game = (() => {
         winningOptions.forEach((element, index) => { 
             if (GameBoard.arrBoardGrid[element[0]].classList.contains(containsClass) && GameBoard.arrBoardGrid[element[1]].classList.contains(containsClass) && GameBoard.arrBoardGrid[element[2]].classList.contains(containsClass)) {
                 console.log("winner");
+                winner = true;
+                player.score++;
+                displayWinner(player);
             }
         });
     }
 
+    displayWinner = (player) =>{
+        let score = document.querySelector(`#${player.player}-score`);
+        score.textContent = player.score;
+        const winningPlayer = document.querySelector(".player-number");
+        let outcome = document.querySelector(".game-info");
+        winningPlayer.textContent = `${player.player}`;
+        let playerName="";
+        if (player.player == "player1"){    
+            playerName= "Player 1";
+        }
+        else {
+            playerName = "Player 2";
+        }
+        outcome.innerHTML = `<span class="player-number"> ${playerName} </span> Wins!`;
+    }
     nextTurn = (player1Turn) => {
         const playingPlayer = document.querySelector(".player-number");
         if (!player1Turn){ //if player one is false, they have already clicked, so display player 2
@@ -86,7 +96,7 @@ const game = (() => {
         }
     }
 
-    addIcon = (clickedCell, arrClickedCells) =>{
+    addIcon = (clickedCell) =>{
         if (!player1Turn){ //meaning player1 already clicked, so player1Turn is now false
             clickedCell.classList.remove("grid-square");
             clickedCell.classList.add("grid-square1-clicked");
