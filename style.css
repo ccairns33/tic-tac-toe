@@ -71,15 +71,17 @@ header{
 }
 .grid-square:hover{
     background-color: rgb(204, 240, 150);
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 .grid-square2:hover{
     background-color: #D3C2CE;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 .no-click:hover{
     cursor:default;
-
+}
+.clickable:hover{
+    cursor:pointer;
 }
 button{
     padding:.5rem 2rem;

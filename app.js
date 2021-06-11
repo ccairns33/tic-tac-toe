@@ -16,7 +16,6 @@ const game = (() => {
     const player2 = playerFactory("player2", 0);
     let clickedCells = 0;
     let winner = false;
-    let gameRound = 0;
     let player1Turn = true; // start off as player 1
 
     const winningOptions = [
@@ -33,6 +32,7 @@ const game = (() => {
     handleClick = (e) => {
         //on click do this only once per cell to avoid over writing
         const cell = e.target;
+        cell.classList.remove("clickable");
         cell.classList.add("no-click"); //no longer clickable
         clickedCells++;
         if (player1Turn) { //if player one's turn
@@ -40,10 +40,10 @@ const game = (() => {
             player1Turn = false; //after click, player1Turn is false
             nextTurn(player1Turn);
             addIcon(cell);
-            if (checkWin(currentPlayer)){ // if there was a winner
+            if (checkWin(currentPlayer)) { // if there was a winner
                 endGame();
             }
-            else if (clickedCells === 9){
+            else if (clickedCells === 9) {
                 endGame();
                 isDraw();
             }
@@ -54,21 +54,21 @@ const game = (() => {
             player1Turn = true;
             nextTurn(player1Turn);
             addIcon(cell);
-            if (checkWin(currentPlayer)){
+            if (checkWin(currentPlayer)) {
                 endGame();
             }
-            else if (clickedCells === 9){
-                endGame();
+            else if (clickedCells === 9) {
                 isDraw();
             }
-            
+
 
         }
     }
     endGame = () => {
-        arrBoardGrid = Array.from(document.querySelectorAll('#grid-square'));
-        arrBoardGrid.forEach((element)=>{
-            element.removeEventListener("click", game.handleClick);
+        GameBoard.arrBoardGrid = Array.from(document.querySelectorAll('#grid-square'));
+        GameBoard.arrBoardGrid.forEach((element) => {
+            element.removeEventListener("click",handleClick);
+            element.classList.remove("clickable");
             element.classList.add("no-click");
         });
     }
@@ -87,10 +87,11 @@ const game = (() => {
                 winner = true;
                 player.score++;
                 displayWinner(player);
-                return true;
             }
-            
+
         });
+        return winner;
+
     }
     isDraw = () => {
         let outcome = document.querySelector(".game-info");
@@ -124,14 +125,14 @@ const game = (() => {
 
     addIcon = (clickedCell) => {
         if (!player1Turn) { //meaning player1 already clicked, so player1Turn is now false
-            clickedCell.classList.remove("grid-square");
-            clickedCell.classList.add("grid-square1-clicked");
+            clickedCell.classList.remove("grid-square", "clickable");
+            clickedCell.classList.add("grid-square1-clicked", "no-click");
 
             clickedCell.innerHTML = `<i class="fas fa-times"></i>`// adding x to cell
         }
         else {
-            clickedCell.classList.remove("grid-square");
-            clickedCell.classList.add("grid-square2-clicked");
+            clickedCell.classList.remove("grid-square", "clickable");
+            clickedCell.classList.add("grid-square2-clicked", "no-click");
 
             clickedCell.innerHTML = `<i class="fas fa-circle"></i>`// adding circle to cell
 
@@ -153,7 +154,7 @@ const GameBoard = (() => {
 
     board.forEach((element, index) => { //for each element in board array, populate DOM
         const boardSquare = document.createElement('div');
-        boardSquare.classList.add('grid-square');
+        boardSquare.classList.add('grid-square', "clickable");
         boardSquare.setAttribute("id", "grid-square");// index will repesent the specific grid square 0-8
         boardGrid.appendChild(boardSquare);
 
