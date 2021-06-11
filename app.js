@@ -1,6 +1,5 @@
-/* 
-<i class="fas fa-tint"></i> //water drop
-<i class="fas fa-dragon"></i> //dragon
+/* reset button and next Round to be implemented at another date
+
 <i class="far fa-circle"></i>
 <i class="fas fa-times"></i>
 */
@@ -29,7 +28,8 @@ const game = (() => {
         [2, 4, 6],
     ];
 
-    //btn event listeners
+
+    
 
     handleClick = (e) => {
         //on click do this only once per cell to avoid over writing
@@ -178,6 +178,8 @@ const GameBoard = (() => {
     boardListeners();
     
     return {
+        board,
+        boardGrid,
         arrBoardGrid,
         boardInit,
         boardListeners
