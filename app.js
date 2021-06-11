@@ -29,6 +29,8 @@ const game = (() => {
         [2, 4, 6],
     ];
 
+    //btn event listeners
+
     handleClick = (e) => {
         //on click do this only once per cell to avoid over writing
         const cell = e.target;
@@ -151,23 +153,34 @@ const GameBoard = (() => {
         board.push(""); //push empty item to array
     }
     let boardGrid = document.querySelector('.board-grid');
+    let arrBoardGrid = Array.from(document.querySelector('.board-grid').childNodes);
 
-    board.forEach((element, index) => { //for each element in board array, populate DOM
-        const boardSquare = document.createElement('div');
-        boardSquare.classList.add('grid-square', "clickable");
-        boardSquare.setAttribute("id", "grid-square");// index will repesent the specific grid square 0-8
-        boardGrid.appendChild(boardSquare);
+   
+    boardInit = (board,boardGrid) =>{
+        board.forEach((element, index) => { //for each element in board array, populate DOM
+            const boardSquare = document.createElement('div');
+            boardSquare.classList.add('grid-square', "clickable");
+            boardSquare.setAttribute("id", "grid-square");// index will repesent the specific grid square 0-8
+            boardGrid.appendChild(boardSquare);
 
-    });
+        });
+    }
 
-    //adding Event Listeners to each square
-    let arrBoardGrid = Array.from(document.querySelectorAll('#grid-square'));
-    arrBoardGrid.forEach((element, index) => {
-        element.addEventListener("click", game.handleClick, { once: true });
-    });
+    boardListeners = () =>{
+        //adding Event Listeners to each square
+        arrBoardGrid = Array.from(document.querySelectorAll('#grid-square'));
+        arrBoardGrid.forEach((element, index) => {
+            element.addEventListener("click", game.handleClick, { once: true });
+        });
 
+    }
+    boardInit(board, boardGrid);
+    boardListeners();
+    
     return {
-        arrBoardGrid
+        arrBoardGrid,
+        boardInit,
+        boardListeners
     };
 
 })();
