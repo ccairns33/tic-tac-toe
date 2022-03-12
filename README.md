@@ -14,7 +14,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <h3 align="center">Restaurant Page</h3>
+  <h3 align="center">Tic-Tac-Toe</h3>
 
   <p align="center">
 Tic-Tac-Toe game created using modular Javascript and factories. <br />
