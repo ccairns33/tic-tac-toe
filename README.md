@@ -14,17 +14,18 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <h3 align="center">Tic-Tac-Toe</h3>
+  <h3 align="center">Restaurant Page</h3>
 
   <p align="center">
-    Tic-tac-toe game created using modular Javascript and factories.
- <br />
-    <a href="https://github.com/ccairns33/tic-tac-toe"><strong>Explore the docs »</strong></a>
+Tic-Tac-Toe game created using modular Javascript and factories. <br />
+    <a href="https://github.com/ccairns33/tic-tac-toe/"><strong>Explore the docs »</strong></a>
     <a href="https://ccairns33.github.io/tic-tac-toe/index.html"><strong>Live Demo! »</strong></a>
     <br />
 
   </p>
 </div>
+
+
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -45,6 +46,9 @@
     <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
+
+
+
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
